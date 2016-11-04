@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Use Open Weather API</title>
+      <meta charset="utf-8">
+      <meta name="description" content="exercise to use the Open Weather API">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <script src="/static/index.js"></script>
+      <link rel="stylesheet" type="text/css" href="normalize.css">
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" rel="stylesheet" />
+      <link rel="stylesheet" type="text/css" href="index.css">
+      <script>
+      $(document).ready(function() {
+        function convertTimestamp(timestamp) {
+          var d = new Date(timestamp * 1000),	// Convert the passed timestamp to milliseconds
+        		yyyy = d.getFullYear(),
+        		mm = ('0' + (d.getMonth() + 1)).slice(-2),	// Months are zero based. Add leading 0.
+        		dd = ('0' + d.getDate()).slice(-2),			// Add leading 0.
+        		hh = d.getHours(),
+        		h = hh,
+        		min = ('0' + d.getMinutes()).slice(-2),		// Add leading 0.
+        		ampm = 'AM',
+        		time;
+        	if (hh > 12) {
+        		h = hh - 12;
+        		ampm = 'PM';
+        	} else if (hh === 12) {
+        		h = 12;
+        		ampm = 'PM';
+        	} else if (hh == 0) {
+        		h = 12;
+        	}
+        	// ie: 2013-02-18, 8:35 AM
+        	time = yyyy + '-' + mm + '-' + dd + ', ' + h + ':' + min + ' ' + ampm;
+        	return time;
+        }
+        console.log('JQuery at the ready!');
+        $('.weatherAPI').submit(function() {
+        // your code here (build up your url)
+        var key='2ea5a66c0f3fe1868437738d283e5931'
+        var key2='b1b15e88fa797225412429c1c50c122a1'
+        var csz=$('#csz').val();
+        console.log(csz);
+        var url='http://api.openweathermap.org/data/2.5/weather?q='+csz+'&units=imperial&appid='+key
+        $.get(url, function(result) {
+            // your code here
+            console.log(result)
+            $('.bottom').html('<b>Location:</b> '+result.name);
+            $('.bottom').append("<p><b>Temperature:</b> "+result.main.temp+"&deg F</p>");
+            $('.bottom').append("<p><b>Sunrise:</b> "+convertTimestamp(result.sys.sunrise)+"</p>");
+            $('.bottom').append("<p><b>Sunset:</b> "+convertTimestamp(result.sys.sunset)+"</p>");
+        }, 'json');
+        // don't forget to return false so the page doesn't refresh
+        return false;
+    });
+      })
+      </script>
+</head>
+<body>
+  <div class='container'>
+    <div class='top'>
+      <form class='weatherAPI'>
+        <label for='city_state_zip'>Location:</label>
+        <input id="csz" type='text' name='city_state_zip' placeholder='Chicago, US e.g.' />
+        <button class='hit_API' role='button' formaction='#'>Get Weather</button>
+      </form>
+    </div>
+    <div class='bottom'>
+
+    </div>
+  </div>
+</body>
+</html>

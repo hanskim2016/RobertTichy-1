@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pokemon Images</title>
+      <meta charset="utf-8">
+      <meta name="description" content="exercise to display Pokemon images">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+      <script src="{{ url_for('static', filename='pokeAPI.js')}}"></script>
+      <!-- <script src="../static/loginregister.js"></script>" -->
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" rel="stylesheet" />
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='normalize.css') }}">
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='pokeAPI.css') }}">
+      <script>
+      $(document).ready(function(){
+        console.log('document loaded, jquery ready.');
+        $('img').click(function(){
+          var num = $(this).attr('id');
+          $.get("http://pokeapi.co/api/v1/pokemon/"+num+"/", function(data) {
+                      $('#info').html('<h4>Name:'+data.name+'</h4>');
+                      var html_str = "";
+                      html_str = "<img src='http://pokeapi.co/media/img/"+num+".png' width='175' height='auto'/>"
+                      $("#info").append(html_str);
+                      var html_str = "";
+                      html_str += "<h4>Types</h4>";
+                      html_str += "<ul>";
+                      for(var i = 0; i < data.types.length; i++) {
+                          html_str += "<li>" + data.types[i].name + "</li>";
+                      }
+                      html_str += "</ul>";
+                      $("#info").append(html_str);
+                      html_str = "";
+                      html_str += "<p>Height:"+data.height+"</p>";
+                      $("#info").append(html_str);
+                      html_str = "";
+                      html_str += "<p>Weight:"+data.weight+"</p>";
+                      $("#info").append(html_str);
+                  }, "json");
+        });
+      })
+      </script>
+</head>
+<body>
+  <div class='container'>
+    <div class='row'>
+      <div class='main col-md-9'>
+      {% for each in poke %}
+        <div class='poke'>
+          <img id='{{each}}' src='http://pokeapi.co/media/img/{{each}}.png' width="125" height="auto" />
+        </div>
+      {% endfor %}
+      </div>
+      <div class="side col-md-3">
+        <p class="text-center h3">Pokedex</p>
+        <div id='info'>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

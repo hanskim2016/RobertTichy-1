@@ -1,0 +1,19 @@
+.poke {
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+}
+.main {
+  height: auto;
+  min-height: 500px;
+  overflow: scroll;
+  display: inline-block;
+  vertical-align: top;
+}
+.side {
+  height: auto;
+  display: inline-block;
+  border: 1rem solid red;
+  padding: 2rem;
+  min-height: 500px;
+}
