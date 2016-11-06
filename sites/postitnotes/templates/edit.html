@@ -1,0 +1,7 @@
+<div class='postitinput'>
+  <form method='POST' action='notes/{{note.id}}/edit'>
+    <input name='subject' class='h5 black' value='{{note.subject}}' /></input>
+    <textarea autofocus name='note' placeholder='note...'>{%- if note.note != None -%}
+      {{note.note}}{%- endif -%}</textarea>
+  </form>
+</div>

@@ -1,0 +1,87 @@
+.container {
+  background-color: #080808;
+}
+.postit {
+  width: 22.5rem;
+  height: 22.5rem;
+  margin-left: 3rem;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+  display: inline-block;
+  vertical-align: top;
+  background-image: url('Post_it_note.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: relative;
+}
+.postittext {
+  width: 90%;
+  max-height: 90%;
+  margin: 1rem;
+  padding: 1rem;
+  overflow-y:hidden;
+  /*border: 1px solid white;*/
+}
+.postitinput {
+  width: 90%;
+  min-height: 90%;
+  margin: 1rem;
+  padding: 1rem;
+  /*overflow-y: scroll;*/
+  /*border: 1px solid red;*/
+}
+.postitinput textarea {
+  background-color: transparent;
+  min-width: 95%;
+  max-width: 95%;
+  min-height: 14rem;
+  max-height: 14rem;
+  margin: 0;
+  outline: none;
+  resize: none;
+  /*border: 1px solid white;*/
+}
+.postitinput input {
+  background-color: transparent;
+  margin: 0;
+  outline: none;
+  min-width: 95%;
+  max-width: 95%;
+  resize: none;
+}
+.add {
+  position: absolute;
+  bottom: 1.2rem;
+  right: 1.2rem;
+}
+.x_del {
+  position: absolute;
+  background-color:red;
+  border-radius: .25rem;
+  width: 1.5rem;
+  text-align: center;
+  color: white;
+  top: 1.75rem;
+  right: 1.75rem;
+  display: none;
+}
+.label {
+  width: 98%;
+}
+#subject, #search {
+  width: 98%;
+  margin-bottom: 1rem;
+}
+.black {
+  color: #222;
+}
+.white {
+  color: #DDD;
+}
+.notes {
+  display: inline-block;
+  margin-bottom: 3rem;
+}
+.input_form {
+  margin-top: 3rem;
+}
