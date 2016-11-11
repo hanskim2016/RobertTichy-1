@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Exercise to display Pokemon images">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="/static/index.css">
+</head>
+<body>
+
+<div class="container">
+  <h1>Dojo Page</h1>
+  <h3>Declare Yourself!</h3>
+  <!-- read on to learn about form actions, we'll talk about the method in a later section -->
+  <form class="a col-sm-9 form-horizontal" action='/post' method='post'>
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="name" class="col-sm-3 control-label">Name: </label>
+      <div class="col-sm-6">
+        <input class="form-control col-sm-6" type='text' name='name'
+        {% if request.session.errors %}
+         value = "{{ request.session.name }}"
+        {% else %}
+         value = ''
+        {% endif %}
+        />
+      </div>
+    </div>
+    <div class="form-group">
+      <br /><label for="location" class="col-sm-3 control-label">Coding Dojo Studio:</label>
+      <div class="col-sm-6">
+        <select  class="form-control" name="location">
+          {% for each in locations %}
+          <option value = "{{ each|lower }}"
+          {% if each|lower == request.session.location %}
+          selected
+          {% endif %}
+          >{{ each|title }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="language" class="col-sm-3 control-label">Favorite Language:</label>
+      <div class="col-sm-6">
+        <select  class="form-control" name="language">
+          {% for each in languages %}
+          <option value = "{{ each|lower }}" {% if each|lower == request.session.language %}selected{% endif %} >{{ each|title}}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label" for="comments">Comments: </label>
+      <div class="col-sm-6">
+        <textarea  class="form-control" rows="3" name="comments">{% if request.session.errors %}{{request.session.comments}}{% else %}{% endif %}
+        </textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-6">
+        <button class="btn btn-success" type='submit'>Button</button>
+      </div>
+    </div>
+  </form>
+  <div class="errors col-sm-12">
+    {% if request.session.errors == True %}
+    {% for each in request.session.err_list %}
+    <p>{{ each }}</p>
+    {% endfor %}
+    {% endif %}
+  </div>
+</div>
+</body>
+</html>

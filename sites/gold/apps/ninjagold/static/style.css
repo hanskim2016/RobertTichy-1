@@ -1,0 +1,91 @@
+@font-face {
+  font-family: 'DomoAregato';
+  src: url('domoaregato.ttf');
+  font-weight: bold;
+}
+#wrapper {
+  width: 980px;
+  display: overflow;
+  background-color: black;
+  padding: 1.5rem;
+  color: #F3C900;
+}
+.ninja {
+  font-family: DomoAregato, serif;
+  font-size: 4rem;
+  margin: .5rem 0 .5rem 0;
+}
+.top {
+  background-color: #541613;
+  display: overflow;
+  padding: 2rem;
+}
+.score {
+  color: #E87327;
+  padding: 1rem;
+}
+.rgt_jobs {
+  margin-left: 2rem;
+  border-width: 0 .2rem 0 .2rem;
+  border-style: solid;
+  border-color: #541613;
+  height: 200px;
+  width: 200px;
+  background-color: #333333;
+  padding: .3em;
+  color: #e87327;
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+}
+.rgt_jobs h4 {
+  display:block;
+  padding: 1rem 0 1rem 0;
+  font-size: 167%;
+}
+.rgt_img {
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: #000000;
+  background-color: transparent;
+  background-image: url('button_yellow.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+  display: block;
+  position: absolute;
+  bottom: 15px;
+  left: 35px;
+  width: 137px;
+  height: 60px;
+}
+.vd1t {
+  background-image: url('VonDutch01.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 40px;
+  position: absolute;
+  top: -5px;
+  left: 0;
+  display:block;
+}
+.vd1b {
+  background-image: url('VonDutch01.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 40px;
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+}
+.bottom {
+  margin-top: 1rem;
+  background-color: #333333;
+  height: 300px;
+  padding: 2rem;
+  color: #F3C900;
+  overflow-y: scroll;
+}
