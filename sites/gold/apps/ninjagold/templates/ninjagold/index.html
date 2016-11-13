@@ -17,77 +17,45 @@
       <div class="score">
         <h3>Your Gold: {{request.session.score}}</h3>
       </div>
+      {% for place in locations %}
       <div class="rgt_jobs text-center">
         <div class="vd1t">
         </div>
-        <h4>Farming for Cash Crops</h4>
-        <p>Earn 10-20 Coins</p>
+        <h4>{{place.title}}</h4>
+        <p>{{place.description}}</p>
         <form>
           {% csrf_token %}
-          <input type='hidden' name="hidden" value='farm'/>
-          <input class="rgt_img" alt="Farm!" formaction="/ninjagold/earn" formmethod="post" type='submit' value="Do It!"></input>
+          <input type='hidden' name="hidden" value='{{place.name}}'/>
+          <input class="rgt_img" alt="Farm!" formaction="{{place.path}}" formmethod="post" type='submit' value="Do It!"></input>
         </form>
         <div class="vd1b">
         </div>
       </div>
-      <div class="rgt_jobs text-center">
-        <div class="vd1t">
-        </div>
-        <h4>
-          Spelunking for Pirate Treasure
-        </h4>
-        <p>Earn 5-10 Coins</p>
-        <form action="/ninjagold/earn" method="post">
-          {% csrf_token %}
-          <input type="hidden" value="cave" name="hidden"/>
-          <input class="rgt_img" alt="Caving!" formaction="/ninjagold/earn" formmethod="post" type='submit' value="Do It!"></input>
-        </form>
-        <div class="vd1b">
-        </div>
-      </div>
-      <div class="rgt_jobs text-center">
-        <div class="vd1t">
-        </div>
-        <h4>
-          Raiding a Castle
-        </h4><br />
-        <p>Earn 2-5 Coins</p>
-        <form>
-          {% csrf_token %}
-          <input type="hidden" value="raid" name="hidden"/>
-          <input class="rgt_img" type="submit" alt="Raid!" formaction="/ninjagold/earn" formmethod="post" value="Raid!"></input>
-        </form>
-        <div class="vd1b">
-        </div>
-      </div>
-      <div class="rgt_jobs text-center">
-        <div class="vd1t">
-        </div>
-        <h4>
-          Gamble at the Casino
-        </h4>
-        <p>Earn or Lose 0-50 Coins</p>
-        <form>
-          {% csrf_token %}
-          <input class="rgt_img" type="submit" alt="Gamble!" formaction="/ninjagold/gamble" formmethod="get" value="Do It!"></input>
-        </form>
-        <div class="vd1b">
-        </div>
-      </div>
+      {% endfor %}
     </div>
     <div class="bottom">
       <table width="100%">
         <thead>
-          <td align="center" width="75%">Activity</td>
+          <td align="left" width="20%">Timestamp</td>
+          <td align="left" width="55%">Activity</td>
           <td align="center" width="10%">Reward</td>
           <td align="center" width="15%">Ledger <br />Balance</td>
         </thead>
         <tbody>
-          {% for line in request.session.lines %}
+          {% for line in request.session.lines reversed %}
           <tr>
-            <td align="left">{{ line.activity }}</td>
-            <td align="right">{{ line.reward }}</td>
-            <td align="right">{{ line.balance }}</td>
+            <td width="20%"><span class="text-left">{{line.time}}</span></td>
+            <td width="55%"><span class="text-left">{{line.activity}}</span></td>
+            <td width="10%" align='right'>
+              <span class="text-right"
+              {% if line.reward < 0 %} style="color: red;"{% else %} style="color: green;"{% endif %}
+              >{{line.reward}}</span>
+            </td>
+            <td width="15%" align='right'>
+              <span class="text-right"
+              {% if line.balance < 0 %} style="color: red;"{% else %} style="color: green;"{% endif %}
+              >{{line.balance}}</span>
+            </td>
           </tr>
           {% endfor %}
         </tbody>
